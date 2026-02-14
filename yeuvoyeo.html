@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family:sans-serif;
+    overflow:hidden;
+}
+
+/* ===== Khung ban đầu ===== */
+.card{
+    background:white;
+    padding:40px 60px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    transition:.6s;
+    z-index:2;
+}
+
+.card.hide{
+    opacity:0;
+    transform:scale(.8);
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* ===== Trang tình yêu ===== */
+.love-page{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    opacity:0;
+    visibility:hidden;
+    transition:.6s;
+}
+
+.love-page.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.love-page img{
+    width:300px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.love-page h2{
+    color:white;
+    margin:20px 0 10px;
+}
+
+.love-page p{
+    color:white;
+    font-size:18px;
+}
+
+/* ===== Tim bay ===== */
+.heart{
+    position:absolute;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0}
+    50%{opacity:1}
+    100%{transform:translateY(-10vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Khung đầu -->
+<div class="card" id="mainCard">
+    <h1>❤️ Happy Valentine ❤️</h1>
+    <p>Có điều này muốn cho bạn xem...</p>
+    <button onclick="openLove()">Bấm vào đây 💌</button>
+</div>
+
+<!-- Trang tình yêu -->
+<div class="love-page" id="lovePage">
+    <h2>💖 I Like You 💖</h2>
+    <img src="voyeu.jpg">
+    <p>Bạn là điều dễ thương nhất hôm nay của mình ✨</p>
+    <button onclick="goBack()">Quay lại</button>
+</div>
+
+<!-- Nhạc -->
+<audio id="iloveyou" src="iloveyou.mp3" loop></audio>
+
+<script>
+function openLove(){
+    const card=document.getElementById("mainCard");
+    card.classList.add("hide");
+
+    setTimeout(()=>{
+        card.style.display="none";
+        document.getElementById("lovePage").classList.add("show");
+    },600);
+
+    document.getElementById("iloveyou").play();
+}
+
+function goBack(){
+    document.getElementById("lovePage").classList.remove("show");
+    const card=document.getElementById("mainCard");
+
+    setTimeout(()=>{
+        card.style.display="block";
+        card.classList.remove("hide");
+    },600);
+}
+
+/* Tim bay */
+function createHeart(){
+    const h=document.createElement("div");
+    h.innerHTML="❤️";
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
